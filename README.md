@@ -15,7 +15,7 @@
 | 1 | 微積分在算什麼？｜一台車看懂微分與積分 | [YouTube](https://youtu.be/SvvJ9_hZBfk) |
 | 2 | 極限是什麼？｜為什麼瞬間速度剛好是2 | [YouTube](https://youtu.be/3j-h16RtjxA) |
 | 3 | 導數的規則｜為什麼加大披薩比較划算？ | [YouTube](https://youtu.be/Wtn1XMQx4rM) |
-| 4 | 找最高點 | 製作中 |
+| 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) |
 | 5 | 邊際成本 | 製作中 |
 | 6 | 累積與e | 製作中 |
 
