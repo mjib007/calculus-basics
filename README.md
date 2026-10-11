@@ -6,7 +6,7 @@
 ![AI](https://img.shields.io/badge/AI-Claude%20(Anthropic)-blueviolet)
 ![Language](https://img.shields.io/badge/Language-繁體中文-red)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE.md)
-![Status](https://img.shields.io/badge/status-active-success)
+![Status](https://img.shields.io/badge/status-六集完結-success)
 [![總覽頁](https://img.shields.io/badge/總覽頁-GitHub%20Pages-1a3a5c)](https://mjib007.github.io/calculus-basics/)
 
 > 給文組大學生的微積分動畫系列。每集從一個生活問題出發：開車、點披薩、擺珍奶攤，照順序看，每集只多學一件事。
@@ -22,7 +22,7 @@
 | 3 | 導數的規則｜為什麼加大披薩比較划算？ | [YouTube](https://youtu.be/Wtn1XMQx4rM) |
 | 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) |
 | 5 | 邊際成本｜團購出價比成本低，要不要接？ | [YouTube](https://youtu.be/zLXmOaGTRHM) |
-| 6 | 累積與e | 製作中 |
+| 6 | 累積與e｜利息每秒都滾進本金，錢會變無限多嗎？ | [YouTube](https://youtu.be/yrOFKnGWJHo) |
 
 ## 這個系列的設計
 
