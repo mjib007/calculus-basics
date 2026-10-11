@@ -1,7 +1,7 @@
 # 微積分基礎：一集一步｜calculus-basics
 
 [![總覽頁](https://img.shields.io/badge/總覽頁-GitHub%20Pages-1a3a5c)](https://mjib007.github.io/calculus-basics/)
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=mjib007.calculus-basics.index)
+![Profile views](https://komarev.com/ghpvc/?username=mjib007&label=Profile%20views&color=4c8eda&style=flat)
 ![Language](https://img.shields.io/badge/Language-繁體中文-red)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE.md)
 
