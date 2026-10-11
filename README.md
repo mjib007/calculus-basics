@@ -1,6 +1,7 @@
 # 微積分基礎：一集一步｜calculus-basics
 
 [![總覽頁](https://img.shields.io/badge/總覽頁-GitHub%20Pages-1a3a5c)](https://mjib007.github.io/calculus-basics/)
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=mjib007.calculus-basics.index)
 ![Language](https://img.shields.io/badge/Language-繁體中文-red)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE.md)
 
@@ -16,7 +17,7 @@
 | 2 | 極限是什麼？｜為什麼瞬間速度剛好是2 | [YouTube](https://youtu.be/3j-h16RtjxA) |
 | 3 | 導數的規則｜為什麼加大披薩比較划算？ | [YouTube](https://youtu.be/Wtn1XMQx4rM) |
 | 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) |
-| 5 | 邊際成本 | 製作中 |
+| 5 | 邊際成本｜團購出價比成本低，要不要接？ | [YouTube](https://youtu.be/zLXmOaGTRHM) |
 | 6 | 累積與e | 製作中 |
 
 ## 新增一集
