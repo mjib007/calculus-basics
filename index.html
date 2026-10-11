@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微積分基礎 | calculus-basics</title>
+<meta name="description" content="給文組大學生的微積分入門動畫系列：一台車看懂微分、積分與極限，照學習順序一集一集看。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf;
+    --ink-70:rgba(22,35,59,.7); --ink-45:rgba(22,35,59,.5);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;}
+  a:hover{color:var(--seal);}
+
+  .cover{max-width:880px;margin:0 auto;padding:56px 16px 36px;border-bottom:1px solid var(--line);position:relative;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.24em;color:var(--brass);font-weight:700;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--brass);}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.8rem,6vw,2.3rem);line-height:1.3;margin:0 0 10px;}
+  .sub{margin:0;color:var(--indigo);font-weight:500;max-width:36em;}
+  .meta{margin-top:16px;font-size:.82rem;color:var(--ink-45);}
+  .seal{position:absolute;top:48px;right:16px;width:72px;height:72px;border:2.5px solid var(--seal);border-radius:6px;color:var(--seal);
+        display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.1rem;
+        writing-mode:vertical-rl;letter-spacing:.1em;transform:rotate(3deg);opacity:.85;}
+  @media (max-width:600px){ .seal{display:none;} }
+
+  main{max-width:880px;margin:0 auto;padding:28px 16px 64px;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.25rem;margin:0 0 6px;}
+  .lede{margin:0 0 24px;color:var(--ink-70);}
+
+  .path{list-style:none;margin:0;padding:0;position:relative;}
+  .path::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:var(--line);}
+  .step{position:relative;padding-left:60px;margin-bottom:22px;}
+  .num{position:absolute;left:0;top:4px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+       font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.1rem;background:var(--panel);border:2px solid var(--brass);color:var(--brass);}
+  .step.todo .num{border-style:dashed;border-color:var(--line);color:var(--ink-45);}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;}
+  .step.todo .card{background:transparent;border-style:dashed;}
+  .card h3{font-family:"Noto Serif TC",serif;font-size:1.1rem;margin:0 0 4px;line-height:1.45;}
+  .q{margin:0 0 10px;color:var(--indigo);font-weight:500;}
+  .card ul{margin:0 0 12px;padding-left:1.2em;color:var(--ink-70);}
+  .links{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;}
+  .btn{display:inline-block;text-decoration:none;font-weight:700;padding:5px 14px;border-radius:999px;border:1px solid var(--seal);color:var(--seal);}
+  .btn:hover{background:var(--seal);color:var(--panel);}
+  .tag{font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:2px 10px;}
+
+  .about{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:.92rem;color:var(--ink-70);}
+  .about p{margin:0 0 8px;}
+  footer{text-align:center;font-size:.78rem;color:var(--ink-45);padding:0 16px 40px;}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">calculus-basics · 學習路徑</div>
+  <h1>微積分基礎：一集一步</h1>
+  <p class="sub">給文組大學生的微積分動畫系列。同一台車從頭講到尾，照順序看，每集只多學一件事。</p>
+  <p class="meta">錢世傑製作｜最後更新 <span id="updated"></span></p>
+  <div class="seal">微積分</div>
+</div>
+
+<main>
+  <h2>學習順序</h2>
+  <p class="lede">實線圓圈是已上架的影片，虛線是製作中。建議從第1集開始。</p>
+  <ol class="path" id="path"></ol>
+
+  <section class="about">
+    <h2>關於這個系列</h2>
+    <p>影片中的車子位置 s＝t² 是教學用的假設例子，畫面上的數字都由程式計算。</p>
+    <p>旁白為AI語音，動畫由Claude Code以程式逐格繪製，做法參考Andrej Karpathy提出的影片製作方式。</p>
+    <p>作者：錢世傑，在中正大學高階法律碩士在職專班、中原大學法律系、輔仁大學法律系、高雄空中大學法律系、中央大學資管系講授AI、AI Agent等課程。
+      聯絡：<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a></p>
+    <p>內容有錯歡迎指正：<a href="https://github.com/mjib007/calculus-basics">GitHub原始檔</a>｜授權：<a href="LICENSE.md">CC BY-NC 4.0</a></p>
+  </section>
+</main>
+
+<footer>同系列：<a href="https://mjib007.github.io/criminal-law-interpretation/">刑法總覽</a></footer>
+
+<script>
+// 新增一集：在這裡加一筆；url留空表示製作中
+const UPDATED = '2026-10-11';
+const EPISODES = [
+  { n: 1, title: '微積分在算什麼？｜一台車看懂微分與積分', q: '這一瞬間多快？總共走了多遠？',
+    points: ['平均速度是割線的斜率，間隔縮小就逼近瞬間速度（導數）',
+             '速度圖下的面積是距離，長條越切越細就是積分',
+             '微分與積分互為反運算：微積分基本定理'],
+    url: 'https://youtu.be/SvvJ9_hZBfk', len: '2:56' },
+  { n: 2, title: '極限：為什麼答案剛好是2？', q: '間隔不能等於0，那瞬間速度怎麼算？',
+    points: ['直接代0會變成0÷0，沒有答案',
+             '先化簡：平均速度＝2＋h，h只是尾巴',
+             '要多接近2都做得到，這個數字就叫極限'],
+    url: '', len: '' },
+  { n: 3, title: '導數的規則', q: 't²的導數為什麼是2t？t³呢？', points: [], url: '', len: '' },
+  { n: 4, title: '找最高點', q: '斜率等於0的地方：利潤什麼時候最大？', points: [], url: '', len: '' },
+  { n: 5, title: '邊際成本', q: '多做一件，成本多多少？', points: [], url: '', len: '' },
+  { n: 6, title: '累積與e', q: '利息不斷滾入本金會怎樣？', points: [], url: '', len: '' },
+];
+
+document.getElementById('updated').textContent = UPDATED;
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+document.getElementById('path').innerHTML = EPISODES.map((e, i) => {
+  const prev = EPISODES[i - 1], next = EPISODES[i + 1];
+  const links = e.url
+    ? `<a class="btn" href="${e.url}" target="_blank" rel="noopener">🎬 看影片${e.len ? '（' + e.len + '）' : ''}</a>`
+      + (prev ? `<span class="tag">先看第${prev.n}集</span>` : '')
+      + (next ? `<span class="tag">接著看第${next.n}集${next.url ? '' : '（製作中）'}</span>` : '')
+    : `<span class="tag">製作中</span>`;
+  return `<li class="step${e.url ? '' : ' todo'}" id="ep${e.n}">
+    <div class="num">${e.n}</div>
+    <div class="card">
+      <h3>${esc(e.title)}</h3>
+      <p class="q">${esc(e.q)}</p>
+      ${e.points.length ? '<ul>' + e.points.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : ''}
+      <div class="links">${links}</div>
+    </div></li>`;
+}).join('');
+</script>
+</body>
+</html>
