@@ -5,7 +5,7 @@
 ![Language](https://img.shields.io/badge/Language-繁體中文-red)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](LICENSE.md)
 
-> 給文組大學生的微積分動畫系列。同一台車從頭講到尾，照順序看，每集只多學一件事。
+> 給文組大學生的微積分動畫系列。每集從一個生活問題出發：開車、點披薩、擺珍奶攤，照順序看，每集只多學一件事。
 
 👉 **總覽頁：[https://mjib007.github.io/calculus-basics/](https://mjib007.github.io/calculus-basics/)**
 
@@ -19,6 +19,12 @@
 | 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) |
 | 5 | 邊際成本｜團購出價比成本低，要不要接？ | [YouTube](https://youtu.be/zLXmOaGTRHM) |
 | 6 | 累積與e | 製作中 |
+
+## 這個系列的設計
+
+- **生活問題先行**：每集開場先問一個日常問題，例如「披薩加大為什麼划算」「團購出價比成本低要不要接」，再帶出數學觀念。
+- **數字由程式計算**：畫面上的面積、利潤、成本都由程式算出，案例中的價格與銷量是教學假設，畫面標示「假設」。
+- **接續上一集**：每集開頭接上一集的問題，結尾預告下一集，說明欄附「先看／接著看」。
 
 ## 新增一集
 
