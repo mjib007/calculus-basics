@@ -39,7 +39,7 @@
   h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
   p{margin:0 0 12px;}
   .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
-  table{border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
   th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
   th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
   .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
@@ -92,7 +92,7 @@
   <output id="ho"></output>
   <p class="note">P 固定在第1秒，Q 在第 1＋h 秒。h 越小，割線越貼著曲線，斜率越接近2。</p>
 </div>
-<p>這個逼近出來的數字（2），就是第1秒的<b>瞬間速度</b>，也叫<b>導數</b>。此時割線變成了貼著曲線的<b>切線</b>。為什麼答案剛好是2、不能直接把間隔設成0，<a href="https://youtu.be/3j-h16RtjxA">第2集</a>會詳細說明。</p>
+<p>這個逼近出來的數字（2），就是第1秒的<b>瞬間速度</b>，也叫<b>導數</b>。此時割線變成了貼著曲線的<b>切線</b>。為什麼答案剛好是2、不能直接把間隔設成0，<a href="ep2-limit.html">第2集</a>會詳細說明。</p>
 
 <h2><span class="n">4</span>導數：放大後曲線像直線</h2>
 <p>把第1秒附近一直放大，曲線看起來就像一條直線，導數就是這條直線的斜率。對 <span class="eq">t²</span> 來說，每一點的導數都是 <span class="eq">2t</span>：</p>
@@ -140,7 +140,7 @@
 
 <div class="nav">
   <a href="../">← 回系列總覽</a>
-  <a href="https://youtu.be/3j-h16RtjxA">下一集：極限是什麼？（影片） →</a>
+  <a href="ep2-limit.html">下一集：極限是什麼？ →</a>
 </div>
 <footer>
   車子位置 s＝t² 為教學用假設例子，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>

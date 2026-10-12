@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第5集講義：邊際成本 | calculus-basics</title>
+<meta name="description" content="微積分第5集講義：邊際成本｜團購出價比成本低，要不要接？，附互動圖、學生常問與思考題解答。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第5集講義</div>
+  <div class="eyebrow">第5集 · 講義</div>
+  <h1>邊際成本｜團購出價比成本低，要不要接？</h1>
+  <p class="key">一句話重點：要不要多做一點，<b>不看平均成本，看「多做這一點，成本多多少」</b>，也就是邊際成本。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/zLXmOaGTRHM" title="邊際成本｜團購出價比成本低，要不要接？" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分20秒。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>生活問題：團購要不要接？<span class="tag">假設</span></h2>
+<p>珍奶攤一天賣100杯，平均一杯成本25元。有公司來團購，要再加做20杯，每杯只出23元。比成本還便宜，接還是不接？</p>
+
+<h2><span class="n">2</span>成本拆成三塊</h2>
+<p>上一集假設每杯成本固定，真實的攤子不是這樣：</p>
+<table>
+  <tr><th>成本</th><th>假設</th><th>特性</th></tr>
+  <tr><td>租金</td><td>一天1,000元</td><td>不管賣幾杯都要付</td></tr>
+  <tr><td>材料</td><td>每杯10元</td><td>做幾杯付幾杯</td></tr>
+  <tr><td>人手</td><td>0.05 × 杯數²</td><td>做越多越忙，要多請人手，成本越墊越高</td></tr>
+</table>
+<p class="eq" style="text-align:center">總成本 ＝ 1,000 ＋ 10 × 杯數 ＋ 0.05 × 杯數²</p>
+
+<h2><span class="n">3</span>兩種成本</h2>
+<table>
+  <tr><th>名稱</th><th>算法</th><th>100杯時</th></tr>
+  <tr><td>平均成本</td><td>總成本 ÷ 杯數</td><td id="avg"></td></tr>
+  <tr><td>邊際成本</td><td>多做一杯，成本多多少（總成本的導數）</td><td id="mc"></td></tr>
+</table>
+
+<h2><span class="n">4</span>用導數算邊際成本</h2>
+<table>
+  <tr><th>項目</th><th>原本</th><th>導數</th></tr>
+  <tr><td>租金</td><td class="eq">1,000</td><td class="eq">0（不會變）</td></tr>
+  <tr><td>材料</td><td class="eq">10 × 杯數</td><td class="eq">10</td></tr>
+  <tr><td>人手</td><td class="eq">0.05 × 杯數²</td><td class="eq">0.1 × 杯數</td></tr>
+</table>
+<p class="eq" style="text-align:center">邊際成本 ＝ 10 ＋ 0.1 × 杯數</p>
+<p>驗算：實際算第101杯多花的錢是 <span id="c101"></span>，和導數算的20元幾乎一樣。</p>
+
+<h2><span class="n">5</span>自己算算看</h2>
+<div class="try">
+  <div class="label">拖動目前的杯數，看團購（加做20杯、每杯23元）值不值得接</div>
+  <svg id="figC" viewBox="0 0 600 380" role="img" aria-label="總成本曲線與切線"></svg>
+  <input type="range" id="qs" min="40" max="220" step="10" value="100" aria-label="目前杯數">
+  <output id="qo"></output>
+  <p class="note">切線斜率就是邊際成本。做越多，曲線越陡，多做一杯越貴。</p>
+</div>
+
+<h2><span class="n">6</span>回到團購：為什麼值得接</h2>
+<table id="tg"><tr><th>項目</th><th>金額</th></tr></table>
+<p>租金不管接不接都要付，早就算在平均成本裡了。接單時只要看<b>多出來的成本</b>。雖然23元低於平均成本25元，還是值得接。</p>
+<p>但邊際成本會越來越高：做到200杯時，多做一杯要 <span id="mc200"></span> 元，這時23元就不能接了。航空公司把空位低價賣出、餐廳打烊前打折，都是同樣的想法。</p>
+
+<h2><span class="n">7</span>學生常問</h2>
+<details><summary>為什麼成本會越做越高？</summary>
+  <p>這一集假設做越多越忙，要多請人手，所以多做一杯的成本會越墊越高。這是簡化的假設，用來看懂邊際成本的意思。</p></details>
+<details><summary>平均成本和邊際成本，哪個比較重要？</summary>
+  <p>看你要做什麼決定。評估整家店賺不賺錢，看平均成本；決定要不要「多做一點」（接單、加班、多進貨），看邊際成本。</p></details>
+<details><summary>為什麼導數算的20元和實際的20.05元有差？</summary>
+  <p>導數是「多做一點點」時的變化率，實際多做整整一杯，成本曲線會再往上彎一點，所以多了0.05元。杯數越多，這個差距相對越小。</p></details>
+
+<h2><span class="n">8</span>思考題</h2>
+<p>如果團購是加做100杯，每杯一樣出23元，還值得接嗎？</p>
+<details><summary>解答</summary><p id="q1"></p></details>
+
+<div class="nav">
+  <a href="ep4-max-profit.html">← 上一集：斜率等於0</a>
+  <a href="ep6-compound-e.html">下一集：累積與e →</a>
+</div>
+<footer>
+  案例中的價格、利率等為教學用假設，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+<script>
+
+const num = x => String(+(+x).toFixed(4));
+const comma = n => Math.round(n).toLocaleString('en-US');
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const $ = id => document.getElementById(id);
+const rows = (id, arr) => $(id).insertAdjacentHTML('beforeend', arr.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join(''));
+// 共用座標（viewBox 600×380）
+const L = 70, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1, x0 = 0, y0 = 0) => ({ X: x => L + (x - x0) / (x1 - x0) * (R - L), Y: y => B - (y - y0) / (y1 - y0) * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${typeof y === 'number' && y >= 1000 ? comma(y) : y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 120; i++) { const x = a + (b - a) * i / 120; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+const clip = `<defs><clipPath id="cp"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+
+
+const cost = q => 1000 + 10 * q + 0.05 * q * q, mc = q => 10 + 0.1 * q;
+$('avg').textContent = comma(cost(100)) + ' ÷ 100 ＝ ' + num(cost(100) / 100) + '元';
+$('mc').textContent = '10 ＋ 0.1 × 100 ＝ ' + num(mc(100)) + '元';
+$('c101').textContent = num(cost(101) - cost(100)) + '元';
+const ex = cost(120) - cost(100), inc = 20 * 23;
+rows('tg', [['多收：20杯 × 23元', comma(inc) + '元'], ['多花：' + comma(cost(120)) + ' − ' + comma(cost(100)), comma(ex) + '元（平均一杯' + num(ex / 20) + '元）'], ['<b>多賺</b>', '<b>' + comma(inc - ex) + '元</b>']]);
+$('mc200').textContent = num(mc(200));
+const ex100 = cost(200) - cost(100);
+$('q1').innerHTML = '加做100杯，總成本從 ' + comma(cost(100)) + ' 元變成 ' + comma(cost(200)) + ' 元，多花 <b>' + comma(ex100) + '元</b>；團購收入 100×23 ＝ ' + comma(2300) + ' 元，會虧 <b>' + comma(ex100 - 2300) + '元</b>，不值得接。因為做得越多，邊際成本越高，後面幾十杯每杯都超過23元。';
+function drawC() {
+  const q = +$('qs').value, M = mk(260, 7000, 0, 0), m = mc(q), dx = 35;
+  let s = axes(M, [0, 50, 100, 150, 200, 250], [2000, 4000, 6000], '杯數', '總成本（元）') + clip;
+  s += `<path d="${path(M, cost, 0, 260)}" fill="none" stroke="${css('--curve')}" stroke-width="4"/>`;
+  s += `<line clip-path="url(#cp)" x1="${M.X(q - dx)}" y1="${M.Y(cost(q) - m * dx)}" x2="${M.X(q + dx)}" y2="${M.Y(cost(q) + m * dx)}" stroke="${css('--seal')}" stroke-width="4"/>`;
+  s += `<circle cx="${M.X(q)}" cy="${M.Y(cost(q))}" r="7" fill="${css('--hl')}"/>`;
+  $('figC').innerHTML = s;
+  const extra = cost(q + 20) - cost(q), gain = 20 * 23 - extra;
+  $('qo').innerHTML = `目前 ${q} 杯：平均成本 ${num(cost(q) / q)} 元，邊際成本 ${num(mc(q))} 元。加做20杯多花 ${comma(extra)} 元，團購收 460 元，${gain >= 0 ? '<b>多賺 ' + comma(gain) + ' 元，值得接</b>' : '<b>虧 ' + comma(-gain) + ' 元，不值得接</b>'}`;
+}
+$('qs').addEventListener('input', drawC); drawC();
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+</script>
+</body>
+</html>

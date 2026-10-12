@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2集講義：極限是什麼？ | calculus-basics</title>
+<meta name="description" content="微積分第2集講義：極限是什麼？｜為什麼瞬間速度剛好是2，附互動圖、學生常問與思考題解答。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第2集講義</div>
+  <div class="eyebrow">第2集 · 講義</div>
+  <h1>極限是什麼？｜為什麼瞬間速度剛好是2</h1>
+  <p class="key">一句話重點：間隔不能等於0，但可以先化簡成「2＋h」，再讓h越來越小：<b>要多接近2都做得到，2就是極限</b>。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/3j-h16RtjxA" title="極限是什麼？｜為什麼瞬間速度剛好是2" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分27秒。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>上一集留下的問題<span class="tag">假設</span></h2>
+<p>沿用第1集的車子：出發後 <span class="eq">t</span> 秒走了 <span class="eq">t²</span> 公尺。把時間間隔一路縮小，第1秒附近的平均速度越來越靠近2：</p>
+<table id="t1"><tr><th>間隔</th><th>平均速度</th></tr></table>
+<p>可是，為什麼答案是2，而不是2.0001？這一集回答這個問題。</p>
+
+<h2><span class="n">2</span>直接代0？不行</h2>
+<p>最直接的想法是把間隔設成0。可是間隔是0，P和Q兩個點就疊在一起，連不成一條線。算式變成：</p>
+<p class="eq" style="text-align:center">0公尺 ÷ 0秒</p>
+<p>這個除法沒有答案。因為「什麼數乘以0會等於0」？任何數都可以，所以0÷0說不出一個確定的值。</p>
+
+<h2><span class="n">3</span>換個做法：先化簡，不要代0</h2>
+<p>間隔是 <span class="eq">h</span> 秒，位置從第1秒的1公尺，變成第 <span class="eq">1＋h</span> 秒的 <span class="eq">(1＋h)²</span> 公尺。一步一步算：</p>
+<table>
+  <tr><th>步驟</th><th>算式</th></tr>
+  <tr><td>1. 展開</td><td class="eq">(1＋h)² ＝ 1 ＋ 2h ＋ h²</td></tr>
+  <tr><td>2. 減掉原本的1</td><td class="eq">2h ＋ h²</td></tr>
+  <tr><td>3. 除以h（h不是0，可以除）</td><td class="eq">(2h ＋ h²) ÷ h ＝ 2 ＋ h</td></tr>
+</table>
+<p>所以第1秒附近的平均速度，永遠是 <b class="eq">2 ＋ h</b>。</p>
+
+<h2><span class="n">4</span>h只是後面的尾巴</h2>
+<div class="try">
+  <div class="label">自己試試看：把 h 往左拉小</div>
+  <svg id="figT" viewBox="0 0 600 170" role="img" aria-label="長度2的長條加上長度h的尾巴"></svg>
+  <input type="range" id="hs" min="0" max="1000" value="1000" aria-label="時間間隔 h">
+  <output id="ho"></output>
+  <p class="note">藍色是永遠都在的2，紅色是尾巴h。h越小，尾巴越短。</p>
+</div>
+<p>代入第1集的三個間隔，結果完全一樣：</p>
+<table id="t2"><tr><th>h</th><th>2 ＋ h</th><th>第1集的平均速度</th></tr></table>
+
+<h2><span class="n">5</span>極限的意思：要多接近都做得到</h2>
+<p>那為什麼答案是2？因為你要它多接近2，都做得到：</p>
+<table id="t3"><tr><th>想要和2差不到</th><th>間隔只要小於</th><th>這時的平均速度</th></tr></table>
+<p>2.0001也不是答案：只要間隔小於0.0001秒，平均速度就會比2.0001還小，跑到它下面。能被逼到任意接近的數字只有2，這個數字就叫做<b>極限</b>。</p>
+
+<h2><span class="n">6</span>lim 怎麼讀</h2>
+<p class="eq" style="text-align:center;font-size:1.3em">lim<sub>h→0</sub> (2 ＋ h) ＝ 2</p>
+<table>
+  <tr><th>符號</th><th>意思</th></tr>
+  <tr><td>lim</td><td>英文 limit（極限）的縮寫</td></tr>
+  <tr><td>h → 0</td><td>h越來越靠近0，但<b>不等於</b>0</td></tr>
+  <tr><td>＝ 2</td><td>最後靠近的數字是2，就是第1秒的瞬間速度，也就是導數</td></tr>
+</table>
+<p>同樣的算法換成第2秒、第3秒，會得到4和6，每一點都是 <span class="eq">2t</span>，第3集會說明這條規則怎麼來。</p>
+
+<h2><span class="n">7</span>學生常問</h2>
+<details><summary>h不能等於0，卻可以非常接近0，這不是很矛盾嗎？</summary>
+  <p>不矛盾。h等於0時，算式是0÷0，沒有意義；但h是0.001、0.000001時，算式都好好的，可以算出2.001、2.000001。極限只問「h越來越小時，結果往哪裡靠」，從頭到尾都不需要h真的等於0。</p></details>
+<details><summary>極限和「大約等於」有什麼不同？</summary>
+  <p>「大約2」是說差一點點也沒關係；「極限是2」是說：你指定任何誤差（0.001、0.000001……），都做得到比它更接近。能做到這件事的數字只有一個，所以極限是一個確定的數字，不是估計值。</p></details>
+<details><summary>為什麼化簡時可以除以h？</summary>
+  <p>因為在化簡的時候，h是一個「很小但不是0」的數，除以不是0的數是合法的。化簡完變成2＋h，才去想h越來越小時會怎樣。</p></details>
+<details><summary>學極限有什麼用？</summary>
+  <p>瞬間速度（導數）、曲線下的面積（積分）、複利的上限e（第6集），背後都是極限。它是把「越來越接近」講清楚的工具。</p></details>
+
+<h2><span class="n">8</span>思考題</h2>
+<p>1. 用同樣的方法，算第3秒的瞬間速度：<span class="eq">[(3＋h)² − 9] ÷ h</span> 化簡後是多少？h趨近0時，極限是多少？</p>
+<details><summary>第1題解答</summary>
+  <p><span class="eq">(3＋h)² ＝ 9 ＋ 6h ＋ h²</span>，減掉9剩 <span class="eq">6h ＋ h²</span>，除以h得 <b class="eq">6 ＋ h</b>。h趨近0時，極限是 <b>6</b>，正好是 2t 在 t＝3 的值。用 h＝0.001 驗算：<span id="a1"></span>。</p></details>
+<p>2. 如果車子的位置是 <span class="eq">t³</span>，第1秒的瞬間速度會逼近哪個數字？</p>
+<details><summary>第2題解答</summary>
+  <p><span class="eq">(1＋h)³ ＝ 1 ＋ 3h ＋ 3h² ＋ h³</span>，減1再除以h，得 <span class="eq">3 ＋ 3h ＋ h²</span>，h趨近0時極限是 <b>3</b>。用 h＝0.001 驗算：<span id="a2"></span>。第3集會講這背後的規則。</p></details>
+
+<div class="nav">
+  <a href="ep1-calculus-intro.html">← 上一集：微積分在算什麼？</a>
+  <a href="ep3-derivative-rules.html">下一集：導數的規則 →</a>
+</div>
+<footer>
+  案例中的價格、利率等為教學用假設，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+<script>
+
+const num = x => String(+(+x).toFixed(4));
+const comma = n => Math.round(n).toLocaleString('en-US');
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const $ = id => document.getElementById(id);
+const rows = (id, arr) => $(id).insertAdjacentHTML('beforeend', arr.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join(''));
+// 共用座標（viewBox 600×380）
+const L = 70, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1, x0 = 0, y0 = 0) => ({ X: x => L + (x - x0) / (x1 - x0) * (R - L), Y: y => B - (y - y0) / (y1 - y0) * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${typeof y === 'number' && y >= 1000 ? comma(y) : y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 120; i++) { const x = a + (b - a) * i / 120; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+const clip = `<defs><clipPath id="cp"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+
+
+const f = t => t * t, P = 1;
+const sec = h => (f(P + h) - f(P)) / h;
+rows('t1', [1, 0.1, 0.01].map(h => [num(h) + '秒', num(sec(h))]).concat([['越來越小', '<b>→ 2</b>']]));
+rows('t2', [1, 0.1, 0.01].map(h => [num(h), num(2 + h), num(sec(h))]));
+const n8 = x => String(+x.toFixed(8));
+rows('t3', [0.1, 0.01, 0.001, 0.0001].map(eps => [n8(eps), n8(eps) + '秒', '例如 h＝' + n8(eps / 2) + '：' + n8(2 + eps / 2)]));
+$('a1').textContent = '(3.001² − 9) ÷ 0.001 ＝ ' + num(((3.001) ** 2 - 9) / 0.001);
+$('a2').textContent = '(1.001³ − 1) ÷ 0.001 ＝ ' + num(((1.001) ** 3 - 1) / 0.001);
+function drawT() {
+  const h = 0.001 * Math.pow(1000, +$('hs').value / 1000);   // 0.001 到 1
+  const U = 170, x0 = 40, y = 60;
+  let s = `<rect x="${x0}" y="${y}" width="${2 * U}" height="50" rx="6" fill="${css('--curve')}"/>`;
+  s += `<rect x="${x0 + 2 * U}" y="${y}" width="${Math.max(2, h * U)}" height="50" fill="${css('--gap')}"/>`;
+  s += `<text x="${x0 + U}" y="${y + 33}" font-size="22" text-anchor="middle" fill="${css('--panel')}">2</text>`;
+  s += `<text x="${x0 + 2 * U + h * U / 2}" y="${y + 80}" font-size="18" text-anchor="middle" fill="${css('--gap')}">h</text>`;
+  [0, 1, 2, 3].forEach(k => s += `<line x1="${x0 + k * U}" y1="${y + 56}" x2="${x0 + k * U}" y2="${y + 66}" stroke="${css('--ink-45')}" stroke-width="2"/><text x="${x0 + k * U}" y="${y - 10}" font-size="15" text-anchor="middle" fill="${css('--ink-45')}">${k}</text>`);
+  $('figT').innerHTML = s;
+  const m = sec(h);
+  $('ho').innerHTML = `h ＝ ${num(h)}：2 ＋ h ＝ <b>${num(2 + h)}</b>（直接用位置算：${num(m)}）`;
+}
+$('hs').addEventListener('input', drawT); drawT();
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+</script>
+</body>
+</html>

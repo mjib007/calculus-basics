@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4集講義：斜率等於0 | calculus-basics</title>
+<meta name="description" content="微積分第4集講義：斜率等於0｜珍奶賣多少錢賺最多？，附互動圖、學生常問與思考題解答。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第4集講義</div>
+  <div class="eyebrow">第4集 · 講義</div>
+  <h1>斜率等於0｜珍奶賣多少錢賺最多？</h1>
+  <p class="key">一句話重點：利潤畫出來像一座山，山頂是平的。<b>找斜率等於0的地方，就找到賺最多的價格</b>。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/N2Ra2yrJfUs" title="斜率等於0｜珍奶賣多少錢賺最多？" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分鐘。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>生活問題：珍奶定多少錢？<span class="tag">假設</span></h2>
+<p>你在夜市賣珍奶，一杯成本20元。賣50元，一天賣100杯。漲價會少賣，降價會多賣。定多少錢，賺最多？</p>
+
+<h2><span class="n">2</span>假設的規則</h2>
+<p>假設每漲1元，就少賣2杯，所以：</p>
+<p class="eq" style="text-align:center">杯數 ＝ 100 − 2 × (售價 − 50) ＝ 200 − 2 × 售價</p>
+<p class="eq" style="text-align:center">利潤 ＝ (售價 − 20) × 杯數</p>
+
+<h2><span class="n">3</span>試算幾個價格</h2>
+<table id="tp"><tr><th>售價</th><th>每杯賺</th><th>杯數</th><th>利潤</th></tr></table>
+<p>50元和70元都是3,000元，左右對稱，山頂在正中間的60元。</p>
+
+<h2><span class="n">4</span>利潤山與斜率</h2>
+<div class="try">
+  <div class="label">自己試試看：拖動售價，看切線怎麼變</div>
+  <svg id="figM" viewBox="0 0 600 380" role="img" aria-label="利潤山與切線"></svg>
+  <input type="range" id="ps" min="30" max="90" step="1" value="45" aria-label="售價">
+  <output id="po"></output>
+  <p class="note">山的左邊斜率是正的（再漲一點會多賺），右邊是負的（再漲就少賺），山頂斜率等於0。</p>
+</div>
+
+<h2><span class="n">5</span>用導數算出山頂</h2>
+<table>
+  <tr><th>步驟</th><th>算式</th></tr>
+  <tr><td>1. 寫出利潤</td><td class="eq">(售價 − 20) × (200 − 2 × 售價)</td></tr>
+  <tr><td>2. 展開</td><td class="eq">−2 × 售價² ＋ 240 × 售價 − 4,000</td></tr>
+  <tr><td>3. 每一項分開算導數（冪次法則）</td><td class="eq">−4 × 售價 ＋ 240</td></tr>
+  <tr><td>4. 令導數等於0</td><td class="eq">−4 × 售價 ＋ 240 ＝ 0 → 售價 ＝ <b>60元</b></td></tr>
+</table>
+<p>第3步裡，常數 −4,000 不會變，導數是0；240×售價 的導數是240；−2×售價² 的導數是 −2×2×售價 ＝ −4×售價。</p>
+
+<h2><span class="n">6</span>生活應用</h2>
+<p>找最大、找最小，都看斜率等於0的地方。商家定價、決定要進多少貨，都是同一個想法。真實市場不會這麼整齊，這裡的數字都是假設。</p>
+
+<h2><span class="n">7</span>學生常問</h2>
+<details><summary>為什麼利潤會是一座山？</summary>
+  <p>售價太低，每杯賺得少；售價太高，賣不出去。利潤＝每杯賺的錢×杯數，一個變大、一個變小，乘起來就在中間某處最大。</p></details>
+<details><summary>為什麼可以「每一項分開算」導數？</summary>
+  <p>利潤是幾項加起來的，每一項各自變化，總變化就是各項變化加起來。所以可以一項一項用冪次法則，再加起來。</p></details>
+<details><summary>斜率等於0，一定是最高點嗎？</summary>
+  <p>不一定，也可能是最低點（谷底）。看圖或看左右兩邊：左邊往上、右邊往下就是山頂；左邊往下、右邊往上就是谷底。</p></details>
+<details><summary>真實的店家也這樣算嗎？</summary>
+  <p>真實的銷量不會剛好每漲1元少賣2杯，但想法相同：先估計售價和銷量的關係，再找利潤最高的點。數字越貼近真實，算出來越有參考價值。</p></details>
+
+<h2><span class="n">8</span>思考題</h2>
+<p>如果珍奶成本漲到30元，其他條件不變，最賺錢的售價會變高還是變低？</p>
+<details><summary>解答</summary><p id="q1"></p></details>
+
+<div class="nav">
+  <a href="ep3-derivative-rules.html">← 上一集：導數的規則</a>
+  <a href="ep5-marginal-cost.html">下一集：邊際成本 →</a>
+</div>
+<footer>
+  案例中的價格、利率等為教學用假設，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+<script>
+
+const num = x => String(+(+x).toFixed(4));
+const comma = n => Math.round(n).toLocaleString('en-US');
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const $ = id => document.getElementById(id);
+const rows = (id, arr) => $(id).insertAdjacentHTML('beforeend', arr.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join(''));
+// 共用座標（viewBox 600×380）
+const L = 70, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1, x0 = 0, y0 = 0) => ({ X: x => L + (x - x0) / (x1 - x0) * (R - L), Y: y => B - (y - y0) / (y1 - y0) * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${typeof y === 'number' && y >= 1000 ? comma(y) : y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 120; i++) { const x = a + (b - a) * i / 120; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+const clip = `<defs><clipPath id="cp"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+
+
+const qty = p => 200 - 2 * p, prof = (p, c = 20) => (p - c) * qty(p), dprof = (p, c = 20) => -4 * p + 200 + 2 * c;
+rows('tp', [40, 50, 55, 60, 65, 70, 80].map(p => [p + '元', (p - 20) + '元', qty(p) + '杯', (p === 60 ? '<b>' : '') + comma(prof(p)) + '元' + (p === 60 ? '（最高）</b>' : '')]));
+const best30 = (200 + 2 * 30) / 4;
+$('q1').innerHTML = '利潤 ＝ (售價 − 30) × (200 − 2 × 售價) ＝ −2×售價² ＋ 260×售價 − 6,000，導數 −4×售價 ＋ 260 ＝ 0，售價 ＝ <b>' + best30 + '元</b>，比原本的60元高。這時賣 ' + qty(best30) + ' 杯，利潤 ' + comma(prof(best30, 30)) + ' 元。成本變高，最佳售價也跟著提高，但只提高了成本漲幅的一半。';
+function drawM() {
+  const p = +$('ps').value, M = mk(90, 3600, 30, 0), m = dprof(p), dx = 10;
+  let s = axes(M, [30, 40, 50, 60, 70, 80, 90], [1000, 2000, 3000], '售價（元）', '利潤（元）') + clip;
+  s += `<path d="${path(M, prof, 30, 90)}" fill="none" stroke="${css('--curve')}" stroke-width="4"/>`;
+  const col = Math.abs(m) < 1 ? css('--hl') : css('--seal');
+  s += `<line clip-path="url(#cp)" x1="${M.X(p - dx)}" y1="${M.Y(prof(p) - m * dx)}" x2="${M.X(p + dx)}" y2="${M.Y(prof(p) + m * dx)}" stroke="${col}" stroke-width="4"/>`;
+  s += `<circle cx="${M.X(p)}" cy="${M.Y(prof(p))}" r="7" fill="${col}"/>`;
+  $('figM').innerHTML = s;
+  const word = m > 0 ? '正的：再漲一點會多賺' : m < 0 ? '負的：再漲就少賺' : '等於0：山頂，賺最多';
+  $('po').innerHTML = `售價 ${p}元：賣 ${qty(p)} 杯，利潤 ${comma(prof(p))} 元，斜率 <b>${m}</b>（${word}）`;
+}
+$('ps').addEventListener('input', drawM); drawM();
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+</script>
+</body>
+</html>

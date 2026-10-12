@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3集講義：導數的規則 | calculus-basics</title>
+<meta name="description" content="微積分第3集講義：導數的規則｜為什麼加大披薩比較划算？，附互動圖、學生常問與思考題解答。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第3集講義</div>
+  <div class="eyebrow">第3集 · 講義</div>
+  <h1>導數的規則｜為什麼加大披薩比較划算？</h1>
+  <p class="key">一句話重點：東西長大一點，面積或體積會多出好幾倍的一點。<b>冪次法則：次方搬到前面，次方再減1</b>。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/Wtn1XMQx4rM" title="導數的規則｜為什麼加大披薩比較划算？" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分31秒。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>生活問題：披薩只多17%？</h2>
+<p>點披薩時，12吋加大到14吋，直徑只多了2吋，大約多17%。披薩真的只多17%嗎？</p>
+
+<h2><span class="n">2</span>算面積：吋數是直徑</h2>
+<table>
+  <tr><th>步驟</th><th>12吋</th><th>14吋</th></tr>
+  <tr><td>1. 吋數就是直徑</td><td>12吋</td><td>14吋</td></tr>
+  <tr><td>2. 半徑＝直徑÷2</td><td>6吋</td><td>7吋</td></tr>
+  <tr><td>3. 面積＝圓周率×半徑×半徑</td><td id="c12"></td><td id="c14"></td></tr>
+</table>
+<p>面積多了 <b id="up"></b>。直徑多一點，面積多更多。其實圓周率兩邊都有，算比例時可以不管它：36變成49，就是多了36%。</p>
+<div class="try">
+  <div class="label">自己試試看：換一個尺寸和12吋比</div>
+  <svg id="figP" viewBox="0 0 600 300" role="img" aria-label="12吋披薩與另一個尺寸的披薩"></svg>
+  <input type="range" id="ds" min="6" max="20" step="1" value="14" aria-label="披薩直徑">
+  <output id="do"></output>
+</div>
+
+<h2><span class="n">3</span>為什麼？多出來的是一圈餅皮</h2>
+<p>半徑多一點點，多出來的是外面一圈薄薄的餅皮。把這一圈剪開拉直，長度是圓周長，寬度是厚度：</p>
+<p class="eq" style="text-align:center">多出的面積 ≈ 圓周長 × 厚度</p>
+<p>用半徑6吋、厚0.1吋驗算：<span id="ring"></span>。所以<b>面積增加的快慢，就是圓周長</b>。</p>
+
+<h2><span class="n">4</span>這就是導數</h2>
+<table>
+  <tr><th>原本</th><th>導數</th><th>說明</th></tr>
+  <tr><td class="eq">圓周率 × 半徑²</td><td class="eq">2 × 圓周率 × 半徑</td><td>剛好就是圓周長</td></tr>
+  <tr><td class="eq">t²</td><td class="eq">2t</td><td>第2集算過，同一條規則</td></tr>
+</table>
+
+<h2><span class="n">5</span>立體的西瓜</h2>
+<p>直徑大10%，體積是 <span class="eq">1.1³ ＝ <span id="m1"></span></span>，多了 <b id="m2"></b>（不計瓜皮，只看整顆的大小）。體積和半徑的三次方成正比，三次方的導數是3倍的平方，所以西瓜大一點，果肉就多很多。</p>
+
+<h2><span class="n">6</span>冪次法則</h2>
+<p>規則是：<b>次方搬到前面，次方再減1</b>。</p>
+<table id="tr"><tr><th>原本</th><th>導數</th><th>第1秒的值</th><th>電腦驗算（間隔0.001）</th></tr></table>
+
+<h2><span class="n">7</span>開車更有感：煞車距離</h2>
+<p>不算反應時間，在減速度固定時，煞車距離和車速的平方成正比。同樣多10公里，車速越高，煞車距離多出來的越多：</p>
+<table id="tb"><tr><th>車速區間</th><th>車速平方的增加量</th><th>比較</th></tr></table>
+<p>車速越快，多踩一點油門，代價越大。實際煞車距離還會受路面、輪胎、車況影響。</p>
+
+<h2><span class="n">8</span>學生常問</h2>
+<details><summary>面積增加的「快慢」是什麼意思？</summary>
+  <p>指半徑每增加1吋，面積大約增加多少。不是時間上的速度。半徑6吋時，圓周長約37.7吋，所以半徑再多一點點，面積大約以「每吋37.7平方吋」的速度增加。</p></details>
+<details><summary>為什麼圓周率用3.14？</summary>
+  <p>圓周率是3.14159……，算披薩用3.14就夠準了，113和154兩個數字不受影響。頁面上的比例是用精確的圓周率算的。</p></details>
+<details><summary>煞車距離為什麼和車速平方成正比？</summary>
+  <p>車子的動能和速度平方成正比，煞車要把動能全部消耗掉。在減速度固定的簡化模型下，煞車距離＝車速²÷(2×減速度)，所以和車速平方成正比。</p></details>
+<details><summary>冪次法則一定成立嗎？</summary>
+  <p>對 t、t²、t³、t⁴……這類「t的次方」都成立。頁面上的表格用電腦把間隔縮到0.001驗算，結果都很接近規則算出來的值。</p></details>
+
+<h2><span class="n">9</span>思考題</h2>
+<p>1. 16吋披薩比12吋披薩多多少面積？</p>
+<details><summary>第1題解答</summary><p><span id="q1"></span></p></details>
+<p>2. 生活中還有什麼東西，「大一點」會讓某個量「多很多」？（開放題）</p>
+
+<div class="nav">
+  <a href="ep2-limit.html">← 上一集：極限是什麼？</a>
+  <a href="ep4-max-profit.html">下一集：斜率等於0 →</a>
+</div>
+<footer>
+  案例中的價格、利率等為教學用假設，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+<script>
+
+const num = x => String(+(+x).toFixed(4));
+const comma = n => Math.round(n).toLocaleString('en-US');
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const $ = id => document.getElementById(id);
+const rows = (id, arr) => $(id).insertAdjacentHTML('beforeend', arr.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join(''));
+// 共用座標（viewBox 600×380）
+const L = 70, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1, x0 = 0, y0 = 0) => ({ X: x => L + (x - x0) / (x1 - x0) * (R - L), Y: y => B - (y - y0) / (y1 - y0) * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${typeof y === 'number' && y >= 1000 ? comma(y) : y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 120; i++) { const x = a + (b - a) * i / 120; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+const clip = `<defs><clipPath id="cp"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+
+
+const area = d => Math.PI * (d / 2) ** 2, area314 = d => 3.14 * (d / 2) ** 2;
+const pct = x => Math.round(x * 1000) / 10;
+$('c12').innerHTML = '3.14×6×6 ≈ <b>' + Math.round(area314(12)) + '</b>平方吋';
+$('c14').innerHTML = '3.14×7×7 ≈ <b>' + Math.round(area314(14)) + '</b>平方吋';
+$('up').textContent = pct(area(14) / area(12) - 1) + '%';
+$('ring').textContent = '實際多出 ' + (Math.PI * (6.1 ** 2 - 36)).toFixed(2) + ' 平方吋，圓周長×厚度＝' + (2 * Math.PI * 6 * 0.1).toFixed(2) + ' 平方吋，幾乎一樣';
+$('m1').textContent = num(1.1 ** 3); $('m2').textContent = Math.round((1.1 ** 3 - 1) * 100) + '%';
+const powers = [[1, 't', '1'], [2, 't²', '2t'], [3, 't³', '3t²'], [4, 't⁴', '4t³']];
+rows('tr', powers.map(([k, a, d]) => [a, d, num(k), num(((1.001) ** k - 1) / 0.001)]));
+const V = [[50, 60], [100, 110]], inc = V.map(([a, b]) => b * b - a * a);
+rows('tb', V.map(([a, b], i) => [a + ' → ' + b, comma(inc[i]), i ? '約' + (inc[1] / inc[0]).toFixed(1) + '倍' : '基準']));
+$('q1').innerHTML = '半徑6吋變8吋，面積比是 8²÷6² ＝ 64÷36，多了 <b>' + pct(area(16) / area(12) - 1) + '%</b>。直徑只多33%，面積卻多了將近八成。';
+function drawP() {
+  const d = +$('ds').value, K = 11, y = 150;
+  let s = `<circle cx="160" cy="${y}" r="${6 * K}" fill="${css('--areaF')}" stroke="${css('--curve')}" stroke-width="3"/>`;
+  s += `<text x="160" y="${y + 6}" font-size="18" text-anchor="middle" fill="${css('--ink')}">12吋</text>`;
+  s += `<circle cx="420" cy="${y}" r="${d / 2 * K}" fill="${css('--areaF')}" stroke="${css('--seal')}" stroke-width="3"/>`;
+  s += `<text x="420" y="${y + 6}" font-size="18" text-anchor="middle" fill="${css('--ink')}">${d}吋</text>`;
+  $('figP').innerHTML = s;
+  const r1 = d / 12 - 1, r2 = area(d) / area(12) - 1;
+  $('do').innerHTML = `${d}吋：直徑 ${r1 >= 0 ? '＋' : ''}${pct(r1)}%，面積約 ${Math.round(area314(d))} 平方吋，比12吋 <b>${r2 >= 0 ? '＋' : ''}${pct(r2)}%</b>`;
+}
+$('ds').addEventListener('input', drawP); drawP();
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+</script>
+</body>
+</html>

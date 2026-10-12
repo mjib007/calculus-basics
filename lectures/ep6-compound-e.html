@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6集講義：累積與e | calculus-basics</title>
+<meta name="description" content="微積分第6集講義：累積與e｜利息每秒都滾進本金，錢會變無限多嗎？，附互動圖、學生常問與思考題解答。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第6集講義</div>
+  <div class="eyebrow">第6集 · 講義</div>
+  <h1>累積與e｜利息每秒都滾進本金，錢會變無限多嗎？</h1>
+  <p class="key">一句話重點：利息結算得越頻繁，錢越多，但有上限，這個上限就是 <b>e ≈ 2.71828</b>。真正讓錢長大的，是時間。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/yrOFKnGWJHo" title="累積與e｜利息每秒都滾進本金，錢會變無限多嗎？" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分33秒。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>生活問題：利息每秒都滾進本金？</h2>
+<p>存錢時，銀行說「每月複利」，和「每年複利」差多少？如果利息每天、甚至每秒都滾進本金，錢會不會變成無限多？</p>
+
+<h2><span class="n">2</span>先誇張一點：1元、年利率100%<span class="tag">假設</span></h2>
+<p>一年結算 <span class="eq">n</span> 次，每次的利率是 <span class="eq">1/n</span>，一年後的本利和是：</p>
+<p class="eq" style="text-align:center;font-size:1.25em">本利和 ＝ (1 ＋ 1/n)<sup>n</sup></p>
+<table id="tn"><tr><th>結算方式</th><th>n</th><th>算式</th><th>一年後</th></tr></table>
+
+<h2><span class="n">3</span>e是上限</h2>
+<p>次數越多，錢越多，但長得越來越慢，不會無限多。讓 n 趨近無限大，用第2集學過的極限來說：</p>
+<p class="eq" style="text-align:center;font-size:1.25em">e ＝ lim<sub>n→∞</sub> (1 ＋ 1/n)<sup>n</sup> ≈ <b id="ev"></b></p>
+<div class="try">
+  <div class="label">自己試試看：把結算次數 n 往右拉大</div>
+  <svg id="figE" viewBox="0 0 600 140" role="img" aria-label="本利和逼近 e 的數線"></svg>
+  <input type="range" id="es" min="0" max="1000" value="0" aria-label="結算次數 n">
+  <output id="eo"></output>
+</div>
+<p><b>e是什麼？</b>就是1元用100%的速度成長，利息每一刻都滾進本金，一年後變成的錢。</p>
+<table>
+  <tr><th>常數</th><th>怎麼來的</th><th>大約</th></tr>
+  <tr><td>π</td><td>任何圓的周長 ÷ 直徑</td><td>3.14</td></tr>
+  <tr><td>e</td><td>1元以100%成長、每一刻都複利，一年後變成幾元</td><td>2.72</td></tr>
+</table>
+
+<h2><span class="n">4</span>e的特別之處：導數就是自己</h2>
+<p>利息不斷滾進本金時，錢長大的速度，跟著當下的錢一起變大。錢越多，長得越快。用導數來說，<span class="eq">eᵗ</span> 的導數就是 <span class="eq">eᵗ</span>：</p>
+<table id="tx"><tr><th>時間 t（年）</th><th>錢 eᵗ</th><th>長大的速度（電腦算的斜率）</th></tr></table>
+
+<h2><span class="n">5</span>回到現實：結算次數差別很小</h2>
+<p>假設年利率2%，存100萬元一年：</p>
+<table id="tm"><tr><th>結算方式</th><th>一年後</th><th>比每年複利多</th></tr></table>
+
+<h2><span class="n">6</span>真正重要的是時間：72法則</h2>
+<p><b>72 ÷ 年報酬率 ≈ 錢翻倍的年數。</b>和精算的結果比一比：</p>
+<table id="t72"><tr><th>年報酬率（假設）</th><th>72法則</th><th>精算</th></tr></table>
+<p class="note">年報酬率都是假設數字，不構成投資建議。</p>
+
+<h2><span class="n">7</span>六集總結</h2>
+<p>微分看變化，積分看累積，極限把兩件事接起來。生活裡的多一點、少一點、越滾越多，都是微積分。想看更多複利的故事，可以參考錢世傑的理財幼幼班系列書籍。</p>
+
+<h2><span class="n">8</span>學生常問</h2>
+<details><summary>為什麼要假設年利率100%？</summary>
+  <p>為了讓數字明顯、看出規律。用1元和100%時，本利和直接就是 (1＋1/n)ⁿ，n越大越接近e，不用再換算。真實利率小很多，但規律一樣。</p></details>
+<details><summary>每一秒都結算，錢為什麼不會無限多？</summary>
+  <p>次數變多，但每次的利率變小（1/n）。兩件事互相抵銷，總和只會越來越靠近e，不會超過它。</p></details>
+<details><summary>72法則為什麼是72？</summary>
+  <p>精算翻倍年數要用對數。如果是連續複利，翻倍年數剛好是69.3除以年報酬率（％）；每年複利時，要再稍微調高一點。72很接近，又能被2、3、4、6、8、9、12整除，好心算，所以大家習慣用72。年報酬率在8%左右時最準。</p></details>
+<details><summary>e在其他地方也會出現嗎？</summary>
+  <p>會。凡是「成長或減少的速度，跟目前的大小成正比」的東西，例如人口成長、細菌繁殖、放射性衰變，算出來都會有e。</p></details>
+
+<h2><span class="n">9</span>思考題</h2>
+<p>如果年報酬是3%，用72法則估算，錢翻倍要幾年？從25歲開始存和從35歲開始存，到65歲時差幾倍？</p>
+<details><summary>解答</summary><p id="q1"></p></details>
+
+<div class="nav">
+  <a href="ep5-marginal-cost.html">← 上一集：邊際成本</a>
+  <a href="../">回系列總覽 →</a>
+</div>
+<footer>
+  案例中的價格、利率等為教學用假設，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+<script>
+
+const num = x => String(+(+x).toFixed(4));
+const comma = n => Math.round(n).toLocaleString('en-US');
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const $ = id => document.getElementById(id);
+const rows = (id, arr) => $(id).insertAdjacentHTML('beforeend', arr.map(r => '<tr>' + r.map(c => '<td>' + c + '</td>').join('') + '</tr>').join(''));
+// 共用座標（viewBox 600×380）
+const L = 70, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1, x0 = 0, y0 = 0) => ({ X: x => L + (x - x0) / (x1 - x0) * (R - L), Y: y => B - (y - y0) / (y1 - y0) * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${typeof y === 'number' && y >= 1000 ? comma(y) : y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 120; i++) { const x = a + (b - a) * i / 120; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+const clip = `<defs><clipPath id="cp"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+
+
+const amt = n => Math.pow(1 + 1 / n, n);
+const ns = [[1, '一年1次'], [2, '半年1次'], [4, '每季'], [12, '每月'], [365, '每天'], [31536000, '每秒']];
+rows('tn', ns.map(([n, w]) => [w, comma(n), '(1 ＋ 1/' + comma(n) + ')<sup>' + comma(n) + '</sup>', amt(n).toFixed(n > 1000 ? 5 : n > 12 ? 4 : 3) + '元']));
+$('ev').textContent = Math.E.toFixed(5);
+rows('tx', [0, 0.5, 1, 1.5, 2].map(t => [t, Math.exp(t).toFixed(3), ((Math.exp(t + 1e-6) - Math.exp(t - 1e-6)) / 2e-6).toFixed(3)]));
+const P = 1e6, r = 0.02, yr = P * (1 + r), mo = P * (1 + r / 12) ** 12, co = P * Math.exp(r);
+rows('tm', [['每年複利', comma(yr) + '元', '—'], ['每月複利', comma(mo) + '元', '＋' + comma(mo - yr) + '元'], ['連續複利', comma(co) + '元', '＋' + comma(co - yr) + '元']]);
+rows('t72', [2, 3, 6, 8, 12].map(g => [g + '%', num(72 / g) + '年', (Math.log(2) / Math.log(1 + g / 100)).toFixed(1) + '年']));
+const k = 1.03 ** 10;
+$('q1').innerHTML = '72 ÷ 3 ＝ <b>24年</b>翻倍（精算 ' + (Math.log(2) / Math.log(1.03)).toFixed(1) + ' 年）。25歲開始存到65歲是40年，35歲開始是30年，差了10年。以3%年複利計算，1.03的10次方約 ' + k.toFixed(2) + '，所以早10年開始，65歲時的金額大約是晚開始的 <b>' + k.toFixed(2) + '倍</b>。';
+function drawE() {
+  const n = Math.round(Math.pow(10, 6 * (+$('es').value / 1000)));
+  const a = amt(n), X = v => 40 + (v - 2) / 0.8 * 520;
+  let s = `<line x1="40" y1="70" x2="560" y2="70" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  [2, 2.2, 2.4, 2.6, 2.8].forEach(v => s += `<line x1="${X(v)}" y1="64" x2="${X(v)}" y2="76" stroke="${css('--ink-45')}" stroke-width="2"/><text x="${X(v)}" y="100" font-size="15" text-anchor="middle" fill="${css('--ink-45')}">${v}</text>`);
+  s += `<line x1="${X(Math.E)}" y1="30" x2="${X(Math.E)}" y2="110" stroke="${css('--hl')}" stroke-width="3" stroke-dasharray="6 5"/><text x="${X(Math.E)}" y="24" font-size="16" text-anchor="middle" fill="${css('--hl')}">e</text>`;
+  s += `<circle cx="${X(a)}" cy="70" r="9" fill="${css('--seal')}"/>`;
+  $('figE').innerHTML = s;
+  $('eo').innerHTML = `一年結算 ${comma(n)} 次：(1 ＋ 1/${comma(n)})<sup>${comma(n)}</sup> ＝ <b>${a.toFixed(6)}</b>，離 e 還差 ${(Math.E - a).toFixed(6)}`;
+}
+$('es').addEventListener('input', drawE); drawE();
+
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => location.reload());
+</script>
+</body>
+</html>

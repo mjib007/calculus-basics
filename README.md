@@ -15,14 +15,14 @@
 
 ## 學習順序
 
-| 集數 | 主題 | 影片 |
-|---|---|---|
-| 1 | 微積分在算什麼？｜一台車看懂微分與積分 | [YouTube](https://youtu.be/SvvJ9_hZBfk) |
-| 2 | 極限是什麼？｜為什麼瞬間速度剛好是2 | [YouTube](https://youtu.be/3j-h16RtjxA) |
-| 3 | 導數的規則｜為什麼加大披薩比較划算？ | [YouTube](https://youtu.be/Wtn1XMQx4rM) |
-| 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) |
-| 5 | 邊際成本｜團購出價比成本低，要不要接？ | [YouTube](https://youtu.be/zLXmOaGTRHM) |
-| 6 | 累積與e｜利息每秒都滾進本金，錢會變無限多嗎？ | [YouTube](https://youtu.be/yrOFKnGWJHo) |
+| 集數 | 主題 | 影片 | 講義 |
+|---|---|---|---|
+| 1 | 微積分在算什麼？｜一台車看懂微分與積分 | [YouTube](https://youtu.be/SvvJ9_hZBfk) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep1-calculus-intro.html) |
+| 2 | 極限是什麼？｜為什麼瞬間速度剛好是2 | [YouTube](https://youtu.be/3j-h16RtjxA) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep2-limit.html) |
+| 3 | 導數的規則｜為什麼加大披薩比較划算？ | [YouTube](https://youtu.be/Wtn1XMQx4rM) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep3-derivative-rules.html) |
+| 4 | 斜率等於0｜珍奶賣多少錢賺最多？ | [YouTube](https://youtu.be/N2Ra2yrJfUs) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep4-max-profit.html) |
+| 5 | 邊際成本｜團購出價比成本低，要不要接？ | [YouTube](https://youtu.be/zLXmOaGTRHM) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep5-marginal-cost.html) |
+| 6 | 累積與e｜利息每秒都滾進本金，錢會變無限多嗎？ | [YouTube](https://youtu.be/yrOFKnGWJHo) | [講義](https://mjib007.github.io/calculus-basics/lectures/ep6-compound-e.html) |
 
 ## 這個系列的設計
 
