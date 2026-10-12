@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1集講義：微積分在算什麼？ | calculus-basics</title>
+<meta name="description" content="微積分第1集講義：用一台車看懂微分（瞬間速度）與積分（總距離），附互動圖與學生常問。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233b; --indigo:#2c4a76; --parchment:#f3ede0; --paper:#fbf8f1; --panel:#fffdf8;
+    --seal:#9c2b3a; --brass:#a9832f; --line:#ddd3bf; --gap:#c0392b;
+    --ink-70:rgba(22,35,59,.72); --ink-45:rgba(22,35,59,.5);
+    --curve:#2c4a76; --hl:#b07d12; --areaF:rgba(44,74,118,.18); --gapF:rgba(192,57,43,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e8ecf3; --indigo:#9db8e0; --parchment:#141a24; --paper:#19202c; --panel:#1d2532;
+      --seal:#e07a87; --brass:#d6b25e; --line:#2f3a4c; --gap:#ff7a6b;
+      --ink-70:rgba(232,236,243,.75); --ink-45:rgba(232,236,243,.55);
+      --curve:#9db8e0; --hl:#e8c25a; --areaF:rgba(157,184,224,.22); --gapF:rgba(255,122,107,.3);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans TC",sans-serif;background:var(--parchment);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  a{color:var(--indigo);text-underline-offset:2px;} a:hover{color:var(--seal);}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px;}
+  header{padding:40px 0 24px;border-bottom:1px solid var(--line);}
+  .crumb{font-size:.85rem;color:var(--ink-45);margin-bottom:12px;}
+  .eyebrow{font-size:.78rem;letter-spacing:.2em;color:var(--brass);font-weight:700;}
+  h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,2.1rem);line-height:1.35;margin:6px 0 10px;}
+  .key{background:var(--panel);border-left:4px solid var(--brass);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0 0;font-weight:500;}
+  .video{position:relative;aspect-ratio:16/9;margin:24px 0 8px;border-radius:8px;overflow:hidden;background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  h2{font-family:"Noto Serif TC",serif;font-size:1.3rem;margin:40px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);}
+  h2 .n{color:var(--brass);margin-right:8px;}
+  h3{font-family:"Noto Serif TC",serif;font-size:1.08rem;margin:0 0 6px;line-height:1.5;}
+  p{margin:0 0 12px;}
+  .tag{display:inline-block;font-size:.75rem;color:var(--brass);border:1px solid var(--line);border-radius:999px;padding:0 10px;margin-left:6px;vertical-align:middle;}
+  table{border-collapse:collapse;margin:8px 0 14px;font-variant-numeric:tabular-nums;}
+  th,td{padding:6px 18px 6px 0;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:.82rem;color:var(--ink-45);font-weight:500;}
+  .eq{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08em;}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px 16px;margin:14px 0 18px;}
+  .try .label{font-weight:700;margin-bottom:6px;}
+  .try svg{width:100%;height:auto;display:block;}
+  .try input[type=range]{width:100%;accent-color:var(--seal);}
+  .try output{display:block;font-variant-numeric:tabular-nums;margin-top:4px;}
+  .try output b{color:var(--seal);}
+  .note{font-size:.88rem;color:var(--ink-45);}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:700;font-family:"Noto Serif TC",serif;}
+  details[open] summary{margin-bottom:8px;}
+  .nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:44px 0 16px;padding-top:18px;border-top:1px solid var(--line);font-size:.95rem;}
+  footer{font-size:.8rem;color:var(--ink-45);padding:8px 0 40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="crumb"><a href="../">微積分基礎總覽</a> ／ 第1集講義</div>
+  <div class="eyebrow">第1集 · 講義</div>
+  <h1>微積分在算什麼？｜一台車看懂微分與積分</h1>
+  <p class="key">一句話重點：<b>微分</b>算「這一瞬間變化多快」，<b>積分</b>算「總共累積多少」，兩件事互為反運算。</p>
+</header>
+
+<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/SvvJ9_hZBfk" title="微積分在算什麼？｜一台車看懂微分與積分" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<p class="note">影片2分56秒。建議先看影片，再讀下面的講義，並動手拖拖看互動圖。</p>
+
+<h2><span class="n">1</span>兩個問題</h2>
+<p>開車時看儀表板，時速60公里，這是<b>這一瞬間</b>的快慢。一路忽快忽慢開完，里程表告訴你<b>總共</b>走了多遠。微積分就是在回答這兩個問題：</p>
+<table>
+  <tr><th>問題</th><th>名稱</th><th>在圖上是什麼</th></tr>
+  <tr><td>這一瞬間多快？</td><td>微分（導數）</td><td>切線的斜率</td></tr>
+  <tr><td>總共累積多少？</td><td>積分</td><td>線下面的面積</td></tr>
+</table>
+
+<h2><span class="n">2</span>平均速度：連接兩點的斜率<span class="tag">假設</span></h2>
+<p>假設一台車出發後 <span class="eq">t</span> 秒，走了 <span class="eq">t²</span> 公尺。第1秒在1公尺，第3秒在9公尺：</p>
+<p class="eq" style="text-align:center">平均速度 ＝ 走的距離 ÷ 花的時間 ＝ (9 − 1) ÷ (3 − 1) ＝ 8 ÷ 2 ＝ <b>4</b>（公尺／秒）</p>
+<p>在位置圖上，這就是連接 (1, 1) 和 (3, 9) 這條線的斜率，這條線叫做<b>割線</b>。</p>
+
+<h2><span class="n">3</span>瞬間速度：把間隔縮小</h2>
+<p>想知道第1秒那一瞬間的速度，就把時間間隔縮小，看平均速度往哪個數字靠：</p>
+<table id="tblH"><tr><th>間隔</th><th>平均速度</th></tr></table>
+<div class="try">
+  <div class="label">自己試試看：把間隔 h 往左拉小</div>
+  <svg id="figH" viewBox="0 0 600 380" role="img" aria-label="位置圖 s 等於 t 平方，以及第1秒的割線"></svg>
+  <input type="range" id="hs" min="0" max="1000" value="1000" aria-label="時間間隔 h">
+  <output id="ho"></output>
+  <p class="note">P 固定在第1秒，Q 在第 1＋h 秒。h 越小，割線越貼著曲線，斜率越接近2。</p>
+</div>
+<p>這個逼近出來的數字（2），就是第1秒的<b>瞬間速度</b>，也叫<b>導數</b>。此時割線變成了貼著曲線的<b>切線</b>。為什麼答案剛好是2、不能直接把間隔設成0，<a href="https://youtu.be/3j-h16RtjxA">第2集</a>會詳細說明。</p>
+
+<h2><span class="n">4</span>導數：放大後曲線像直線</h2>
+<p>把第1秒附近一直放大，曲線看起來就像一條直線，導數就是這條直線的斜率。對 <span class="eq">t²</span> 來說，每一點的導數都是 <span class="eq">2t</span>：</p>
+<table id="tblD"><tr><th>時間 t</th><th>導數（瞬間速度）2t</th></tr></table>
+<p><b>微分</b>，就是從位置算出每個瞬間的速度。</p>
+
+<h2><span class="n">5</span>積分：線下面的面積就是距離</h2>
+<p>反過來，如果只知道速度 <span class="eq">v ＝ 2t</span>，要怎麼算走了多遠？速度乘時間是距離，在速度圖上，就是<b>線下面的面積</b>。速度一直在變，就先切成長條，每條都是長方形，面積好算：</p>
+<div class="try">
+  <div class="label">自己試試看：把長條切得越來越細</div>
+  <svg id="figN" viewBox="0 0 600 380" role="img" aria-label="速度圖 v 等於 2t，以及 0 到 3 秒的長條"></svg>
+  <input type="range" id="ns" min="1" max="60" value="3" aria-label="長條數">
+  <output id="no"></output>
+  <p class="note">紅色缺口是長條少算的部分。條數越多，缺口越小，總和越接近9。</p>
+</div>
+<table id="tblN"><tr><th>切幾條</th><th>面積總和</th><th>和9的差距</th></tr></table>
+<p>把無限多條細長條加起來，就是<b>積分</b>，答案是9公尺。</p>
+
+<h2><span class="n">6</span>微積分基本定理：兩件事互為反運算</h2>
+<p>答案9，剛好是第3秒時的位置 <span class="eq">3² ＝ 9</span>。這不是巧合：</p>
+<ol>
+  <li>時間多走一小段，面積就多出一條細長條。</li>
+  <li>這條長條的寬是那一小段時間，高是當時的速度。</li>
+  <li>多出的面積（多走的距離）÷ 寬（那一小段時間）＝ 速度。</li>
+</ol>
+<p>所以<b>位置微分得到速度，速度積分得到位置的變化</b>，這就是微積分基本定理。</p>
+
+<h2><span class="n">7</span>學生常問</h2>
+<details><summary>學這個要幹嘛？</summary>
+  <p>只要東西一直在變，就用得到：商學的邊際成本（第5集）、定價找最大利潤（第4集）、複利的累積（第6集），都是微分或積分。沒有微積分，只能算一段時間的平均；有了微積分，才能算某一瞬間。</p></details>
+<details><summary>斜率是什麼？我有點忘了</summary>
+  <p>斜率就是坡度：往右走1格，往上爬幾格。算法是「上升的高度 ÷ 前進的距離」。直線的斜率到處都一樣；曲線每一點的陡度都不同，所以才需要微分。</p></details>
+<details><summary>割線和切線差在哪？</summary>
+  <p>割線通過曲線上兩個點，斜率是一段路的<b>平均</b>。切線貼著曲線上的一點，斜率是那一刻的<b>瞬間</b>變化，就像儀表板此刻顯示的時速。</p></details>
+<details><summary>為什麼線下面的面積就是距離？</summary>
+  <p>面積是高×寬。高是速度、寬是時間，速度×時間就是距離。例如時速60公里開2小時，長方形面積 60×2 ＝ 120 公里。速度一直在變時，圖形不再是長方形，才需要積分。</p></details>
+<details><summary>長條不可能真的切成無限多條，這樣算數嗎？</summary>
+  <p>不需要真的切到無限多。重點是：你指定任何一個誤差，例如0.001，都找得到夠多的條數，讓差距比它更小。能被逼到這麼近的數字只有一個，就是9。這個想法叫做<b>極限</b>，第2集會講。</p></details>
+
+<h2><span class="n">8</span>思考題</h2>
+<p>1. 你的生活或工作中，有哪個數字是「變化」，哪個是它的「累積」？（開放題，沒有標準答案）</p>
+<p>2. 同一台車（位置 <span class="eq">t²</span>），第2秒那一瞬間的速度是多少？</p>
+<details><summary>第2題解答</summary>
+  <p>導數是 <span class="eq">2t</span>，第2秒是 2×2 ＝ <b>4公尺／秒</b>。也可以用縮小間隔驗算：間隔0.01秒，平均速度是 (2.01² − 2²) ÷ 0.01 ＝ <span id="ans2"></span>，很接近4。</p></details>
+
+<div class="nav">
+  <a href="../">← 回系列總覽</a>
+  <a href="https://youtu.be/3j-h16RtjxA">下一集：極限是什麼？（影片） →</a>
+</div>
+<footer>
+  車子位置 s＝t² 為教學用假設例子，頁面上的數字都由程式計算。作者：錢世傑｜<a href="mailto:mjib007@gmail.com">mjib007@gmail.com</a>｜<a href="https://www.facebook.com/mjib007">臉書</a>｜授權：<a href="../LICENSE.md">CC BY-NC 4.0</a>
+</footer>
+</div>
+
+<script>
+const f = t => t * t, v = t => 2 * t, P = 1, T = 3;
+const sec = h => (f(P + h) - f(P)) / h;
+const lsum = n => { const w = T / n; let s = 0; for (let i = 0; i < n; i++) s += v(i * w) * w; return s; };
+const num = x => String(+x.toFixed(4));
+const css = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+
+// 表格（由程式計算）
+document.getElementById('tblH').insertAdjacentHTML('beforeend',
+  [1, 0.1, 0.01, 0.001].map(h => `<tr><td>${num(h)}秒</td><td>${num(sec(h))}</td></tr>`).join('') + '<tr><td>越來越小</td><td><b>→ 2</b></td></tr>');
+document.getElementById('tblD').insertAdjacentHTML('beforeend',
+  [0.5, 1, 2, 3].map(t => `<tr><td>第${t}秒</td><td>${num(2 * t)}</td></tr>`).join(''));
+document.getElementById('tblN').insertAdjacentHTML('beforeend',
+  [3, 6, 30, 300].map(n => `<tr><td>${n}條</td><td>${num(lsum(n))}</td><td>${num(f(T) - lsum(n))}</td></tr>`).join('') + '<tr><td>無限多條</td><td><b>9</b></td><td>0</td></tr>');
+document.getElementById('ans2').textContent = num((f(2.01) - f(2)) / 0.01);
+
+// 共用座標
+const L = 60, R = 580, TOP = 20, B = 340;
+const mk = (x1, y1) => ({ X: x => L + x / x1 * (R - L), Y: y => B - y / y1 * (B - TOP) });
+function axes(M, xs, ys, xl, yl) {
+  let s = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/><line x1="${L}" y1="${TOP}" x2="${L}" y2="${B}" stroke="${css('--ink-45')}" stroke-width="2"/>`;
+  xs.forEach(x => s += `<text x="${M.X(x)}" y="${B + 24}" font-size="16" text-anchor="middle" fill="${css('--ink-45')}">${x}</text>`);
+  ys.forEach(y => s += `<text x="${L - 10}" y="${M.Y(y) + 5}" font-size="16" text-anchor="end" fill="${css('--ink-45')}">${y}</text>`);
+  s += `<text x="${R}" y="${B - 10}" font-size="15" text-anchor="end" fill="${css('--ink-45')}">${xl}</text><text x="${L + 8}" y="${TOP + 14}" font-size="15" fill="${css('--ink-45')}">${yl}</text>`;
+  return s;
+}
+const path = (M, fn, a, b) => { let d = ''; for (let i = 0; i <= 100; i++) { const x = a + (b - a) * i / 100; d += (i ? 'L' : 'M') + M.X(x).toFixed(1) + ',' + M.Y(fn(x)).toFixed(1); } return d; };
+
+// 互動1：割線
+function drawH() {
+  const k = +document.getElementById('hs').value / 1000;
+  const h = 0.01 * Math.pow(200, k);               // 0.01 到 2，對數刻度
+  const M = mk(3.5, 10.5), m = sec(h);
+  let s = axes(M, [0, 1, 2, 3], [3, 6, 9], 't（秒）', 's（公尺）');
+  s += `<defs><clipPath id="cH"><rect x="${L}" y="${TOP}" width="${R - L}" height="${B - TOP}"/></clipPath></defs>`;
+  s += `<path d="${path(M, f, 0, 3.24)}" fill="none" stroke="${css('--curve')}" stroke-width="4"/>`;
+  s += `<line clip-path="url(#cH)" x1="${M.X(0)}" y1="${M.Y(f(P) - m * P)}" x2="${M.X(3.5)}" y2="${M.Y(f(P) + m * (3.5 - P))}" stroke="${css('--seal')}" stroke-width="3"/>`;
+  s += `<circle cx="${M.X(P)}" cy="${M.Y(f(P))}" r="7" fill="${css('--hl')}"/><text x="${M.X(P) - 12}" y="${M.Y(f(P)) - 12}" font-size="18" text-anchor="end" fill="${css('--ink')}">P</text>`;
+  s += `<circle cx="${M.X(P + h)}" cy="${M.Y(f(P + h))}" r="6" fill="${css('--ink')}"/>`;
+  if (h > 0.25) s += `<text x="${M.X(P + h) - 12}" y="${M.Y(f(P + h)) - 10}" font-size="18" text-anchor="end" fill="${css('--ink')}">Q</text>`;
+  document.getElementById('figH').innerHTML = s;
+  document.getElementById('ho').innerHTML = `間隔 h ＝ ${h.toFixed(h < 0.1 ? 3 : 2)} 秒，割線斜率（平均速度）＝ (${(1 + h).toFixed(3)}² − 1) ÷ ${h.toFixed(3)} ＝ <b>${m.toFixed(3)}</b>`;
+}
+// 互動2：長條與缺口
+function drawN() {
+  const n = +document.getElementById('ns').value, w = T / n;
+  const M = mk(3.5, 7);
+  let s = axes(M, [0, 1, 2, 3], [2, 4, 6], 't（秒）', 'v（公尺／秒）');
+  for (let i = 0; i < n; i++) {
+    const a = i * w, b = a + w;
+    s += `<rect x="${M.X(a)}" y="${M.Y(v(a))}" width="${M.X(b) - M.X(a)}" height="${B - M.Y(v(a))}" fill="${css('--areaF')}" stroke="${css('--curve')}" stroke-width="${n > 20 ? .6 : 1.5}"/>`;
+    s += `<polygon points="${M.X(a)},${M.Y(v(a))} ${M.X(b)},${M.Y(v(a))} ${M.X(b)},${M.Y(v(b))}" fill="${css('--gapF')}" stroke="${css('--gap')}" stroke-width="${n > 20 ? .5 : 1.2}"/>`;
+  }
+  s += `<path d="${path(M, v, 0, 3.4)}" fill="none" stroke="${css('--curve')}" stroke-width="4"/>`;
+  document.getElementById('figN').innerHTML = s;
+  const S = lsum(n);
+  document.getElementById('no').innerHTML = `${n} 條：面積總和 <b>${num(S)}</b>，紅色缺口 ${num(f(T) - S)}，真正的距離是 9`;
+}
+document.getElementById('hs').addEventListener('input', drawH);
+document.getElementById('ns').addEventListener('input', drawN);
+drawH(); drawN();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { drawH(); drawN(); });
+</script>
+</body>
+</html>

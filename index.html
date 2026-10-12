@@ -91,14 +91,14 @@
 <footer>其他教材：<a href="https://mjib007.github.io/criminal-law-interpretation/">刑法總覽</a></footer>
 
 <script>
-// 新增一集：在這裡加一筆；url留空表示製作中
+// 新增一集：在這裡加一筆；url留空表示製作中；note填講義網頁路徑
 const UPDATED = '2026-10-12';
 const EPISODES = [
   { n: 1, title: '微積分在算什麼？｜一台車看懂微分與積分', q: '這一瞬間多快？總共走了多遠？',
     points: ['平均速度是割線的斜率，間隔縮小就逼近瞬間速度（導數）',
              '速度圖下的面積是距離，長條越切越細就是積分',
              '微分與積分互為反運算：微積分基本定理'],
-    url: 'https://youtu.be/SvvJ9_hZBfk', len: '2:56' },
+    url: 'https://youtu.be/SvvJ9_hZBfk', len: '2:56', note: 'lectures/ep1-calculus-intro.html' },
   { n: 2, title: '極限是什麼？｜為什麼瞬間速度剛好是2', q: '間隔不能等於0，那瞬間速度怎麼算？',
     points: ['直接代0會變成0÷0，沒有答案',
              '先化簡：平均速度＝2＋h，h只是尾巴',
@@ -132,6 +132,7 @@ document.getElementById('path').innerHTML = EPISODES.map((e, i) => {
   const prev = EPISODES[i - 1], next = EPISODES[i + 1];
   const links = e.url
     ? `<a class="btn" href="${e.url}" target="_blank" rel="noopener">🎬 看影片${e.len ? '（' + e.len + '）' : ''}</a>`
+      + (e.note ? `<a class="btn" href="${e.note}">📖 講義</a>` : '')
       + (prev ? `<span class="tag">先看第${prev.n}集</span>` : '')
       + (next ? `<span class="tag">接著看第${next.n}集${next.url ? '' : '（製作中）'}</span>` : '')
     : `<span class="tag">製作中</span>`;
